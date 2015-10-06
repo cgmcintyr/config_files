@@ -38,8 +38,9 @@ highlight ColorColumn ctermbg=0
 
 
 """ STYLE
-:highlight ExtraWhitespace ctermbg=red guibg=red
-:autocmd Syntax * syn match ExtraWhitespace /\s\+$\| \+\ze\t/
+" Uncomment following two lines to highlight ExtraWhiteSpace
+" :highlight ExtraWhitespace ctermbg=red guibg=red
+" :autocmd Syntax * syn match ExtraWhitespace /\s\+$\| \+\ze\t/
 
 
 """ OTHER
