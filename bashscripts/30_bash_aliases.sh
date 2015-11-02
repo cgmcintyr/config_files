@@ -1,6 +1,7 @@
 #!/bin/bash
 
-alias ls='ls -Fl --color=auto'
+alias ls='ls -F --color=auto'
+alias ll='ls -Fl --color=auto'
 alias la='ls -aFl --color=auto'
 alias tree='tree -CF'
 alias dj='python manage.py'
