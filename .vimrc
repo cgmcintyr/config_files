@@ -1,62 +1,134 @@
-set nocompatible
-execute pathogen#infect()
+""""""""""""""""
+" MY MINIVIMRC "
+""""""""""""""""
+
+" filetype support
 filetype plugin indent on
+syntax on
 
+" because it is there
+" runtime macros/matchit.vim
 
-""" COLORS
-syntax enable
-set t_Co=16
-set background=dark
+" various settings
+set autoindent
+set backspace=indent,eol,start
+set complete+=t,d
+set foldlevelstart=999
+set foldmethod=indent
+set grepprg=grep\ -rnH
+set hidden
+set incsearch
+set laststatus=2
+set mouse=a
+set path=.,**
+set ruler
+set shiftround
+set smarttab
+set tags=./tags;,tags;
+set wildcharm=<C-z>
+set wildmenu
+set wildmode=full
 
+" various autocommands
+augroup minivimrc
+    autocmd!
+    " automatic location/quickfix window
+    autocmd QuickFixCmdPost [^l]* cwindow
+    autocmd QuickFixCmdPost    l* lwindow
+augroup END
 
-""" FILETYPES
-au BufNewFile,BufRead *.html set filetype=htmldjango
+" various adjustments of the default colorscheme
+hi Visual       cterm=NONE ctermbg=white    ctermfg=darkblue
+hi ModeMsg      cterm=NONE ctermbg=green    ctermfg=black
+hi StatusLineNC cterm=bold ctermbg=darkgrey
+hi Search       cterm=NONE ctermbg=yellow   ctermfg=black
 
+" commands for adjusting indentation rules manually
+command! -nargs=1 Spaces execute "setlocal shiftwidth=" . <args> . " softtabstop=" . <args> . " expandtab" | set shiftwidth? softtabstop? expandtab?
+command! -nargs=1 Tabs   execute "setlocal shiftwidth=" . <args> . " softtabstop=" . <args> . " noexpandtab" | set shiftwidth? softtabstop? expandtab?
 
-""" TABS AND SPACES
-set tabstop=4     " number of visual spaces per tab
-set shiftwidth=4  " Indents will have a width of 4
-set softtabstop=4 " number of spaces in tabs when editing
-set expandtab     " tabs are spaces, spaces are tabs (wait no...)
+" juggling with files
+nnoremap ,f :find *
+nnoremap ,s :sfind *
+nnoremap ,v :vert sfind *
+nnoremap ,t :tabfind *
 
+" juggling with buffers
+nnoremap ,b         :buffer *
+nnoremap ,B         :sbuffer *
+nnoremap <PageUp>   :bprevious<CR>
+nnoremap <PageDown> :bnext<CR>
+nnoremap <BS>       <C-^>
 
-""" C Options
-set autoindent " Use indentation from previous line
-set cindent " Use intelligent indentation for C
-set showmatch " show matching braces
+" juggling with definitions
+nnoremap ,j :tjump /
+nnoremap ,p :ptjump /
+nnoremap ,d :dlist /
+nnoremap [D [D:djump   <C-r><C-w><S-Left><Left>
+nnoremap ]D ]D:djump   <C-r><C-w><S-Left><Left>
 
+" juggling with matches
+nnoremap ,i :ilist /
+nnoremap [I [I:ijump   <C-r><C-w><S-Left><Left><Left>
+nnoremap ]I ]I:ijump   <C-r><C-w><S-Left><Left><Left>
 
-""" UI CONFIG
-set number         " show line numbers
-set showcmd        " show command in bottom bar
+" juggling with changes
+nnoremap ,; *``cgn
+nnoremap ,, #``cgN
 
-set cursorline
-highlight CursorLine ctermbg=0 cterm=NONE
+" smooth greppin'
+command! -nargs=+ -complete=file_in_path -bar Grep silent! grep! <args> | redraw!
 
-set colorcolumn=81 " highlight column 81
-highlight ColorColumn ctermbg=0 
+" juggling with quickfix entries
+nnoremap <End>  :cnext<CR>
+nnoremap <Home> :cprevious<CR>
 
+" super quick search and replace
+nnoremap <Space><Space> :'{,'}s/\<<C-r>=expand("<cword>")<CR>\>/
+nnoremap <Space>%       :%s/\<<C-r>=expand("<cword>")<CR>\>/
 
-""" STYLE
-" Uncomment following two lines to highlight ExtraWhiteSpace
-" :highlight ExtraWhitespace ctermbg=red guibg=red
-" :autocmd Syntax * syn match ExtraWhitespace /\s\+$\| \+\ze\t/
+" smarter command-line
+cnoremap <expr> <Tab>   getcmdtype() == "/" \|\| getcmdtype() == "?" ? "<CR>/<C-r>/" : "<C-z>"
+cnoremap <expr> <S-Tab> getcmdtype() == "/" \|\| getcmdtype() == "?" ? "<CR>?<C-r>/" : "<S-Tab>"
 
+" smoother listing
+cnoremap <expr> <CR>    CCR()
+function! CCR()
+    if getcmdtype() == ":"
+        let cmdline = getcmdline()
+            if cmdline =~ '\v^(dli|il)' | return "\<CR>:" . cmdline[0] . "jump  " . split(cmdline, " ")[1] . "\<S-Left>\<Left>"
+        elseif cmdline =~ '\v^(cli|lli)' | return "\<CR>:silent " . repeat(cmdline[0], 2) . "\<Space>"
+        elseif cmdline =~ '^old' | return "\<CR>:edit #<"
+        elseif cmdline =~ '^ls' | return "\<CR>:b"
+        elseif cmdline =~ '/#$' | return "\<CR>:"
+        else | return "\<CR>" | endif
+    else | return "\<CR>" | endif
+endfunction
 
-""" OTHER
-set hidden      " leave hidden buffers open
-set history=100 " by default vim saves your last 8 commands, we can handle more
+" better completion menu
+inoremap <expr> <Tab>   pumvisible() ? "\<C-n>" : "\<Tab>"
+inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
+inoremap ,, <C-n><C-r>=pumvisible() ? "\<lt>Down>\<lt>C-p>\<lt>Down>\<lt>C-p>" : ""<CR>
+inoremap ,: <C-x><C-f><C-r>=pumvisible() ? "\<lt>Down>\<lt>C-p>\<lt>Down>\<lt>C-p>" : ""<CR>
+inoremap ,= <C-x><C-l><C-r>=pumvisible() ? "\<lt>Down>\<lt>C-p>\<lt>Down>\<lt>C-p>" : ""<CR>
 
+" brace expansion
+inoremap (<CR> (<CR>)<Esc>O
+inoremap {<CR> {<CR>}<Esc>O
+inoremap [<CR> [<CR>]<Esc>O
 
-""" CTRL-P
-set runtimepath^=~/.vim/bundle/ctrlp.vim
-let g:ctrlp_map = '<c-p>'
-let g:ctrlp_cmd = 'CtrlP'
-let g:ctrlp_working_path_mode = 'ra'
+" JavaScript
+augroup JS
+    autocmd!
+    autocmd FileType javascript call JavaScriptSetup()
+augroup END
 
-set wildignore+=*/tmp/*,*.so,*.swp,*.zip     " MacOSX/Linux
-set wildignore+=*\\tmp\\*,*.swp,*.zip,*.exe  " Windows
-let g:ctrlp_custom_ignore = '\v[\/]\.(git|hg|svn)$'
-
-""" MAPPINGS
-map <leader>rr :source ~/.vimrc<CR>
+function! JavaScriptSetup()
+    setlocal define=^\\s*\\(self\\\|this\\\|function\\\|var\\\|define\\)[('\"]\\{-\\}
+    setlocal suffixesadd+=.js
+    if &expandtab
+        let &l:include = '^\s\{,' . &shiftwidth . "}\\(import[^'\\\"]*\\|.\\{-\\}require\(\\)*['\\\"]\\zs[^'\\\"]*\\ze"
+    else
+        let &l:include = "^\t*\\(import[^'\\\"]*\\|.\\{-\\}require\(\\)*['\\\"]\\zs[^'\\\"]*\\ze"
+    endif
+endfunction

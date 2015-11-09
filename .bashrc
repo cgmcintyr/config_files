@@ -72,7 +72,7 @@ source /usr/local/bin/virtualenvwrapper.sh
 
 # Jumpdir
 function jd {
-    TARGET="$(jumpdir search $@)"
+    TARGET="$(jumpdir-search search $@)"
 
     if [ $TARGET != "None" ]; then
         cd $TARGET
