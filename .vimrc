@@ -31,6 +31,8 @@ set tags=./tags;,tags;
 set wildcharm=<C-z>
 set wildmenu
 set wildmode=full
+set number
+set relativenumber
 
 
 " various autocommands
@@ -55,17 +57,19 @@ command! -nargs=1 Tabs   execute "setlocal shiftwidth=" . <args> . " softtabstop
 
 
 " line numbers
-function !NumberToggle()
+function! NumberToggle()
     if(&relativenumber == 1)
-        set number
+        set norelativenumber
     else
         set relativenumber
     endif
 endfunc
 
 " Ctrl-n to switch between relative/absolute line numbering
-nnoremap <C-n> :call NumberToggle<CR> 
-
+nnoremap <C-n> :call NumberToggle()<CR> 
+autocmd InsertEnter * :set norelativenumber
+autocmd InsertLeave * :set relativenumber
+:highlight LineNr ctermfg=darkgrey
 
 " juggling with files
 nnoremap ,f :find *

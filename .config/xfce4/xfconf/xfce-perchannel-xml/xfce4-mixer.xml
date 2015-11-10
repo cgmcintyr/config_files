@@ -5,16 +5,16 @@
   <property name="volume-step-size" type="uint" value="5"/>
   <property name="sound-cards" type="empty">
     <property name="HDAIntelPCHAlsamixer" type="array">
-      <value type="string" value="Internal Mic Boost"/>
-      <value type="string" value="Internal Mic"/>
-      <value type="string" value="Mic Boost"/>
-      <value type="string" value="Microphone"/>
-      <value type="string" value="PCM"/>
-      <value type="string" value="Speaker"/>
-      <value type="string" value="Headphone"/>
       <value type="string" value="Master"/>
+      <value type="string" value="Headphone"/>
+      <value type="string" value="Speaker"/>
+      <value type="string" value="PCM"/>
+      <value type="string" value="Microphone"/>
+      <value type="string" value="Mic Boost"/>
+      <value type="string" value="Internal Mic"/>
+      <value type="string" value="Internal Mic Boost"/>
     </property>
   </property>
-  <property name="window-height" type="int" value="269"/>
-  <property name="window-width" type="int" value="501"/>
+  <property name="window-height" type="int" value="629"/>
+  <property name="window-width" type="int" value="1116"/>
 </channel>
