@@ -28,9 +28,9 @@
       <property name="&lt;Super&gt;p" type="string" value="xfce4-display-settings --minimal"/>
       <property name="&lt;Primary&gt;Escape" type="string" value="xfdesktop --menu"/>
       <property name="override" type="bool" value="true"/>
-      <property name="&lt;Super&gt;t" type="string" value="xfce4-terminal"/>
       <property name="&lt;Super&gt;f" type="string" value="iceweasel"/>
       <property name="Print" type="string" value="scrot &apos;%Y-%m-%d_%H-%M-%S_$wx$h.png&apos; -e &apos;mv $f ~/Pictures/Screenshots&apos;"/>
+      <property name="&lt;Super&gt;t" type="string" value="xfce4-terminal --geometry=90x25"/>
     </property>
   </property>
   <property name="xfwm4" type="empty">
