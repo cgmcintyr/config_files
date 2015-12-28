@@ -54,9 +54,11 @@ hi Search       cterm=NONE ctermbg=yellow   ctermfg=black
 
 
 " commands for adjusting indentation rules manually
-command! -nargs=1 Spaces execute "setlocal shiftwidth=" . <args> . " softtabstop=" . <args> . " expandtab" | set shiftwidth? softtabstop? expandtab?
-command! -nargs=1 Tabs   execute "setlocal shiftwidth=" . <args> . " softtabstop=" . <args> . " noexpandtab" | set shiftwidth? softtabstop? expandtab?
+command! -nargs=1 Spaces execute "setlocal shiftwidth=" . <args> . " softtabstop=" . <args> . " tabstop=" . <args> . " expandtab" | set shiftwidth? softtabstop? tabstop? expandtab?
+command! -nargs=1 Tabs   execute "setlocal shiftwidth=" . <args> . " softtabstop=" . <args> . " tabstop=" . <args> . " noexpandtab" | set shiftwidth? softtabstop? tabstop? expandtab?
 
+" Visual Tabs
+set list lcs=trail:·,tab:\|\-
 
 " line numbers
 function! NumberToggle()

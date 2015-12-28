@@ -39,7 +39,7 @@ funcdir="$HOME/bashscripts"
 
 for file in `ls ${funcdir}`; do
     afile=${funcdir}/$file
-    if [ -x "$afile" ]; then
+    if [ -x $afile ]; then
         . $afile
     fi
 done

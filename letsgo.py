@@ -22,14 +22,14 @@ def copy_dir_contents(src, dst, ignore=IGNORE):
             chalk.yellow("Ignoring {0}".format(f))
             continue
 
-        fpath = os.path.join(os.getcwd(), f)
+        fpath = os.path.join(src, f)
         dst_path = os.path.join(dst, f)
 
         if os.path.isdir(fpath):
-            if os.path.exists(dst_path):
-                shutil.rmtree(dst_path)
+            if not os.path.exists(dst_path):
+                os.mkdir(dst_path)
             chalk.green("Copying '{0}' and its contents".format(f))
-            shutil.copytree(fpath, dst_path)
+            copy_dir_contents(fpath, dst_path, ignore)
         else:
             chalk.green("Copying file '{0}'".format(f))
             shutil.copy(fpath, dst)
