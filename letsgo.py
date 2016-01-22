@@ -28,10 +28,10 @@ def copy_dir_contents(src, dst, ignore=IGNORE):
         if os.path.isdir(fpath):
             if not os.path.exists(dst_path):
                 os.mkdir(dst_path)
-            chalk.green("Copying '{0}' and its contents".format(f))
+            chalk.green("Copying '{0}' and its contents to '{1}'".format(f, dst))
             copy_dir_contents(fpath, dst_path, ignore)
         else:
-            chalk.green("Copying file '{0}'".format(f))
+            chalk.green("Copying file '{0}' to '{1}'".format(f, dst))
             shutil.copy(fpath, dst)
 
 

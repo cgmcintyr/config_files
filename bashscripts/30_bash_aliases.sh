@@ -15,3 +15,6 @@ alias pysimpleserve='python -m SimpleHTTPServer 8080'
 # TCP Port Shortcuts
 alias openport='sudo iptables -A INPUT -p tcp -j ACCEPT --dport'
 alias closeport='sudo iptables -A INPUT -p tcp -j DROP --dport'
+
+# Kick network-manager
+alias eduroam='sudo service network-manager restart'
