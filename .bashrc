@@ -8,7 +8,6 @@ esac
 
 
 ## OPTIONS AND VARIABLES
-
 shopt -s no_empty_cmd_completion # Stop bash trying to auto-complete empty lines
 shopt -s histappend              # Append to history file rather than overwriting
 shopt -s checkwinsize            # If necessary, update LINES/COLUMNS after each command 
@@ -20,21 +19,14 @@ HISTSIZE=2000
 HISTFILESIZE=5000
 
 
-
 ## EXPORTS 
-
-# Set prompt in case no bash_prompt file is found
 export PS1='\u@\h:\w\$ '
-
 export EDITOR='vim'
 export GIT_EDITOR='vim'
-
 export GCC_COLORS='error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quote=01'
 
 
-
 ## SOURCE SCRIPTS 
-
 funcdir="$HOME/bashscripts"
 
 for file in `ls ${funcdir}`; do
@@ -43,7 +35,6 @@ for file in `ls ${funcdir}`; do
         . $afile
     fi
 done
-
 
 
 ## OTHER
@@ -80,4 +71,3 @@ function jd {
         echo "Jumpdir could not find a matching directory :("
     fi
 }
-    
