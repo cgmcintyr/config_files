@@ -12,6 +12,10 @@ alias djrun='python manage.py runserver'
 # Python
 alias pysimpleserve='python -m SimpleHTTPServer 8080'
 
+# Scheme
+alias scheme='rlwrap mit-scheme'
+alias scheme='rlwrap guile'
+
 # TCP Port Shortcuts
 alias openport='sudo iptables -A INPUT -p tcp -j ACCEPT --dport'
 alias closeport='sudo iptables -A INPUT -p tcp -j DROP --dport'
