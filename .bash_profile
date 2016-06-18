@@ -6,3 +6,4 @@
 
 export PATH=$PATH:~/opt/bin
 
+pyarchey
