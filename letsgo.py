@@ -36,7 +36,7 @@ def copy_dir_contents(src, dst, ignore=IGNORE):
 
 
 if __name__ == '__main__':
-    chalk.white("Copying contents of '{0}' to '{1}'...".format(os.getcwd(), HOME))
-    copy_dir_contents(os.getcwd(), HOME)
+    chalk.white("Copying contents of '{0}' to '{1}'...".format(os.path.join(HOME, 'config_files'), HOME))
+    copy_dir_contents(os.path.join(HOME,'config_files'),  HOME)
     chalk.white("Setup complete, best of luck!")
 
