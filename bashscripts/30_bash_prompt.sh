@@ -28,9 +28,9 @@ function parse_git_branch
 # Set prompt
 if [ $(id -u) -eq 0 ];
 then
-    PS1="${debian_chroot:+($debian_chroot) }[${BRed}\u${NC}] [\h] ${Green}\w${NC} [$(parse_git_branch)]\n> "
+    PS1="${debian_chroot:+($debian_chroot) }[${BRed}\u${NC}] [\h] ${Green}\w${NC} ${Red}$(parse_git_branch)${NC}\n> "
 else
-    PS1="${debian_chroot:+($debian_chroot) }[${BYellow}\u${NC}] [\h] ${Green}\w${NC} [$(parse_git_branch)]\n> "
+    PS1="${debian_chroot:+($debian_chroot) }[${BYellow}\u${NC}] [\h] ${Green}\w${NC} ${Red}$(parse_git_branch)${NC}\n> "
 fi
 
 # If this is an xterm set the title to user@host:dir
