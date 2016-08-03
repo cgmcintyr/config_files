@@ -38,5 +38,6 @@ def copy_dir_contents(src, dst, ignore=IGNORE):
 if __name__ == '__main__':
     chalk.white("Copying contents of '{0}' to '{1}'...".format(os.path.join(HOME, 'config_files'), HOME))
     copy_dir_contents(os.path.join(HOME,'config_files'),  HOME)
+    os.symlink(os.path.join(HOME, '.vim/.vimrc'), os.path.join(HOME, '.vimrc'))
     chalk.white("Setup complete, best of luck!")
 
