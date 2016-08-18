@@ -30,6 +30,6 @@ alias eduroam='sudo service network-manager restart'
 alias strgrep='grep -Ril'
 
 # Docker
-alias dcleancontainers 'docker ps -a | grep 'weeks ago' | awk '{print $1}' | xargs --no-run-if-empty docker rm'
-alias dcleanimages 'docker images | grep "<none>" | awk '{print $3}' | xargs docker rmi'
-alias dclean 'dcleancontainers && dcleanimages'
+alias dcleancontainers='docker ps -a | grep "weeks ago" | awk "{print $1}" | xargs --no-run-if-empty docker rm'
+alias dcleanimages='docker images | grep "<none>" | awk "{print $3}" | xargs docker rmi'
+alias dclean='dcleancontainers && dcleanimages'
